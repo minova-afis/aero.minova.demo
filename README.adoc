@@ -1,2 +1,22 @@
-# aero.minova.demo
+= aero.minova.demo
 Demo project for Spring Boot and Docker
+
+In diesem Projekt versuchen wir einen einfache Spring Boot Anwendung zu erstellen.
+Diese wollen wir dann auf GitHub speichern und dort bauen lassen.
+Danach soll sie als Docker Container / Docker Image nach Docker Hub exportiert werden.
+
+Als letztes wollen wir sie dann auf einem QNAP NAS installieren.
+Dort soll auch ein Update der Anwendung durchgeführt werden.
+
+== Spring Boot Projekt anlegen
+
+Für dieses Beispiel legen wir mit link:https://start.spring.io[Spring Initializr] ein neues Projekt an.
+
+image::doc/images/spring-initializr.png[]
+
+* Wir wollen ein Maven Projekt erstellen.
+* Wir wollen in Java Version 11 programmieren.
+* Wir verwenden das aktuellste stabile Release von Spring Boot.
+* Als Namen verwenden wir `aero.minova.demo`.
+
+  
