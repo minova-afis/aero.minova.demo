@@ -8,6 +8,8 @@ Danach soll sie als Docker Container / Docker Image nach Docker Hub exportiert w
 Als letztes wollen wir sie dann auf einem QNAP NAS installieren.
 Dort soll auch ein Update der Anwendung durchgeführt werden.
 
+
+
 == Spring Boot Projekt anlegen
 
 Für dieses Beispiel legen wir mit link:https://start.spring.io[Spring Initializr] ein neues Projekt an.
@@ -19,4 +21,35 @@ image::doc/images/spring-initializr.png[]
 * Wir verwenden das aktuellste stabile Release von Spring Boot.
 * Als Namen verwenden wir `aero.minova.demo`.
 
-  
+=== RestController erstellen
+
+Wir wollen die Anwendung auf eine HTTP-Anfrage reagieren lassen.
+Dazu benötigen wir einen `@RestController`.
+
+Im link:pom.xml[`pom.xml`] müssen wir die Abhängigkeit einfügen.
+
+====
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+====
+
+Jetzt können wir die Klasse link:src/main/java/aero/minova/demo/controller/MyContoller.java[`MyController`] erstellen.
+Die Klasse ist als `@RestController` definiert und hat eine Methode für das Get-Mapping.
+
+====
+ @RestController
+ public class MyController {
+    @GetMapping(value = "/")
+    public String getRoot() {
+        return "Hello World";
+    }
+ }
+====
+
+Wenn wir die Anwendung starten, können wir auf localhost Port 8080 das Ergebnis sehen.
+
+image::doc/images/localhost-8080.png[]
+
+Als Antwort erhalten wir Hello World im Browser angezeigt.
