@@ -21,6 +21,9 @@ image::doc/images/spring-initializr.png[]
 * Wir verwenden das aktuellste stabile Release von Spring Boot.
 * Als Namen verwenden wir `aero.minova.demo`.
 
+Nachdem das Projekt erstellt wurde, laden wir es automatisch herunter.
+Das ZIP-File entpacken wir und kopieren das Ergebnis in das neue Projekt.
+
 === RestController erstellen
 
 Wir wollen die Anwendung auf eine HTTP-Anfrage reagieren lassen.
@@ -28,25 +31,27 @@ Dazu benötigen wir einen `@RestController`.
 
 Im link:pom.xml[`pom.xml`] müssen wir die Abhängigkeit einfügen.
 
-====
+[source,xml]
+----
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-====
+----
 
 Jetzt können wir die Klasse link:src/main/java/aero/minova/demo/controller/MyController.java[`MyController`] erstellen.
 Die Klasse ist als `@RestController` definiert und hat eine Methode für das Get-Mapping.
 
-====
- @RestController
- public class MyController {
+[source,java]
+----
+@RestController
+public class MyController {
     @GetMapping(value = "/")
     public String getRoot() {
         return "Hello World";
     }
- }
-====
+}
+----
 
 Wenn wir die Anwendung starten, können wir auf localhost Port 8080 das Ergebnis sehen.
 
