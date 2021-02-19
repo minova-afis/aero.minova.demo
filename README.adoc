@@ -35,7 +35,7 @@ Im link:pom.xml[`pom.xml`] müssen wir die Abhängigkeit einfügen.
         </dependency>
 ====
 
-Jetzt können wir die Klasse link:src/main/java/aero/minova/demo/controller/MyContoller.java[`MyController`] erstellen.
+Jetzt können wir die Klasse link:src/main/java/aero/minova/demo/controller/MyController.java[`MyController`] erstellen.
 Die Klasse ist als `@RestController` definiert und hat eine Methode für das Get-Mapping.
 
 ====
