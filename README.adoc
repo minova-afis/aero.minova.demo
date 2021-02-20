@@ -211,3 +211,34 @@ Wenn wir die Anwendung starten, können wir auf localhost Port 8080 das Ergebnis
 image::doc/images/localhost-8080.png[]
 
 Als Antwort erhalten wir Hello World im Browser angezeigt.
+
+== Dockerfile anlegen
+
+Als nächsten Schritt erstellen wir ein Dockerfile. 
+Es dient dazu, aus der Spring Boot Anwendung ein Docker Image zu erstellen.
+
+image::doc/images/eclipse-new-file.png[]
+
+Im Project Explorer wählen wir unser Projekt aus.
+Mit Ctrl+3 (Cmd+3) können wir eine neue Datei anlegen.
+Wir schreiben `new file` und wählen den Eintrag `New (File) - Open the New item wizard`.
+
+image::doc/images/eclipse-new-dockerfile.png[]
+
+Als `File name:` geben wir Dockerfile an und klicken auf finish.
+Unter Umständen wird dann ein Editor gesucht. 
+Eclipse hat einen Editor für Dockerfiles im Angebot; den kann man gerne installieren.
+
+In das link:Dockerfile[Dockerfile] schreiben wir den folgenden Inhalt.
+
+----
+FROM openjdk:11-jdk-oraclelinux7 <1>
+ARG JAR_FILE=target/*.jar <2>
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT [ "java", "-jar", "/app.jar" ]
+----
+ 
+<1> Wir verwenden Java 11. 
+Es gibt eine Version, die im Container funktionieren sollte.
+
+<2> Wenn wir später beim Erstellen eine Fehlermeldung erhalten, die besagt, dass es keine jar - Datei gibt, dann müssen wir zuerst noch einmal mit Maven das Projekt bauen (`mvn clean verify`).
