@@ -379,6 +379,39 @@ Successfully tagged minova/demo:latest
 Am Anfang steht der Benutzername von Dockerhub (`minova`).
 Danach kann ein freier Name gewählt werden (`demo`).
 
+=== Port Freigabe ermöglichen
 
+Wenn man auf einen Port zugreifen will, kann man das über die Kommandozeile einfach erreichen.
 
+----
+docker run -p 8080:8080 minova/demo
+----
+
+Der Port wird mir aber nicht als Option angezeigt, wenn ich es über das Docker Dashboard starten / anlegen möchte.
+Dies sollte aber doch auch möglich sein.
+
+Dazu muss man das link:Dockerfile[Dockerfile] mit einer weiteren Option ausstatten.
+
+----
+EXPOSE 8080
+----
+
+Wenn man jetzt das Image neu erstellt und einen neuen Container im Docker Dashboard anlegt, hat man auch die Möglichkeit, den Port freizugeben.
+
+image::doc/images/docker-new-container.png[]
+
+In den Images sieht man jetzt auch unser Image (`minova/demo`).
+Wir klicken auf Run, damit ein neuer Container erstellt wird.
+
+image::doc/images/docker-container-options.png[]
+
+Wenn wir die `Optional Settings` öffnen, können wir entsprechende Einstellungen vornehmen.
+Den `Container Name` setzen wir mal auf TEST.
+Den `Container Port` 8080/tcp mappen wir auf den lokalen Port 8080.
+Wenn wir den Container jetzt starten (`Run`), können wir wieder unsere WebSite aufrufen.
+Hätten wir als lokalen Port 8081 angegeben, würde die Adresse link:http://localhost:8081[http://localhost:8081] lauten.
+
+image::doc/images/docker-container-status.png[]
+
+Im Docker Dashoboard sehen wir auch den Status des Containers.
 
