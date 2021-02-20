@@ -415,3 +415,81 @@ image::doc/images/docker-container-status.png[]
 
 Im Docker Dashoboard sehen wir auch den Status des Containers.
 
+== Docker Image releasen
+
+Im nächsten Schritt wollen wir das Image auf DockerHub releasen.
+So können anderen das Image laden und verwenden.
+Wenn wir uns noch nicht am DockerHub angemeldet haben, müssen wir das jetzt nachholen.
+
+----
+$ docker login
+Authenticating with existing credentials...
+Login Succeeded
+----
+
+Da wir uns über das Docker Dashboard bereits angemeldet haben, erscheint die obige Meldung.
+
+Sobald wir angemeldet sind, können wir das Image hochladen.
+
+----
+$ docker push minova/demo:latest <1>
+The push refers to repository [docker.io/minova/demo]
+d64f110ad9ce: Pushing [===============================>                   ]  10.62MB/17.05MB
+21824d6622de: Mounted from library/openjdk 
+1fc832d4cd48: Mounted from library/openjdk 
+2dc759e04e34: Mounted from library/openjdk 
+----
+
+<1> Wichtig ist der Name des Image. 
+Er muss mit dem Benutzernamen beginnen. 
+Ansonsten hat man wahrscheinlich keine Schreibrechte auf das Repository und kann es deswegen nicht verwenden.
+
+Nach dem erfolgreichen Hochladen, sollte folgende Meldung in der Kommandzeile erscheinen.
+
+----
+The push refers to repository [docker.io/minova/demo]
+d64f110ad9ce: Pushed 
+21824d6622de: Mounted from library/openjdk 
+1fc832d4cd48: Mounted from library/openjdk 
+2dc759e04e34: Mounted from library/openjdk 
+latest: digest: sha256:24593de3d109228f097e4051eaa2816903e27b32b5e68a0ca11a0f86ed26cf1c size: 1166
+----
+
+Jetzt kann man das Image auf DockerHub sehen.
+
+== Image als Container im NAS installieren
+
+Wenn das Image veröffentlicht wurde, kann es auch von anderen verwendet werden.
+
+image::doc/images/nas-load-image.png[]
+
+Dazu melden wir uns an einem QNAP NAS an und öffnen die Container Station.
+Im Reiter Images können wir ein neues Image `Ziehen`.
+Der Name ist `minova/demo`.
+Als Tag haben wir `latest` angegeben. 
+Dies wird auch vorgeschlagen.
+
+image::doc/images/nas-load-image-status.png[]
+
+Sobald wir auf `Ziehen` geklickt haben, können wir den Status verfolgen, indem wir das Fenster mit den Hintergrundaufgaben öffnen.
+Wir erreichen es, indem wir auf das Icon mit der `1` klicken. 
+
+image::doc/images/nas-create-container.png[]
+
+Sobald das Image vollständig geladen wurde, können wir einen Container daraus erstellen.
+
+image::doc/images/nas-config-container-name.png[]
+
+Als Namen legen wir `TEST` fest.
+Dann öffnen wir die `Erweiterten Einstellungen >>`. 
+
+image::doc/images/nas-config-container-port.png[]
+
+Dort können wir im Reiter Netzwerk die Portweiterleitung konfigurieren.
+Wir verwenden mal den Port 8089 und erstellen den Container.
+
+image::doc/images/nas-verify-container.png[]
+
+Sobald der Container läuft, können wir die Seite auf dem NAS aufrufen.
+Der Port 8089 ist der Port des NAS, der an den Port 8080 im Container weitergeleitet wird.
+
